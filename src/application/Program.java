@@ -1,34 +1,27 @@
 package application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
-import entities.Employee;
+import entities.BrazilInterestService;
 
 public class Program {
 	public static void main(String[] args) {
 		
 		Locale.setDefault(Locale.US);
-		List<Employee> list = new ArrayList<>();
-		String path = "D:\\out\\Employees.csv";
-		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-			String employeeCsv = br.readLine();
-			while (employeeCsv != null) {
-				String[] fields = employeeCsv.split(",");
-				list.add(new Employee(fields[0], Double.parseDouble(fields[1])));
-				employeeCsv = br.readLine();
-			}
-			Collections.sort(list);
-			for (Employee emp : list) {
-				System.out.println(emp.getName() + ", " + String.format("%.2f", emp.getSalary()));
-			}
-		} catch (IOException e) {
-			System.out.println("Error: " + e.getMessage());
-		}
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Amount: ");
+		double amount = sc.nextDouble();
+		System.out.print("Months: ");
+		int months = sc.nextInt();
+		
+		BrazilInterestService is = new BrazilInterestService(2.0);
+		double payment = is.payment(amount, months);
+		
+		System.out.println("Payment after " + months + " months:");
+		System.out.println(String.format("%.2f", payment));
+		
+		sc.close();
 	}
 }
