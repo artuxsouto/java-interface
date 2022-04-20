@@ -1,14 +1,14 @@
 package entities;
 
-public class BrazilInterestService implements InterestService {
+public class USAInterestService implements InterestService {
 	
 	private double interestRate;
 	
-	public BrazilInterestService() {
+	public USAInterestService() {
 		
 	}
 
-	public BrazilInterestService(double interestRate) {
+	public USAInterestService(double interestRate) {
 		this.interestRate = interestRate;
 	}
 	
