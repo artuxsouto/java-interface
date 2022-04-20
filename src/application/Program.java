@@ -1,25 +1,26 @@
 package application;
 
-import java.util.Locale;
-
-import model.entities.AbstractShape;
-import model.entities.Circle;
-import model.entities.Rectangle;
-import model.enums.Color;
+import model.entities.ComboDevice;
+import model.entities.ConcretePrinter;
+import model.entities.ConcreteScanner;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		Locale.setDefault(Locale.US);
+		ConcretePrinter p = new ConcretePrinter("1080");
+		p.processDoc("My Letter");
+		p.print("My Letter");
+		System.out.println();
 		
-		AbstractShape s1 = new Circle(Color.BLACK, 2.0);
-		AbstractShape s2 = new Rectangle(Color.WHITE, 3.0, 4.0);
+		ConcreteScanner s = new ConcreteScanner("2003");
+		s.processDoc("My Email");
+		System.out.println("Scan result: " + s.scan());
+		System.out.println();
 		
-		System.out.println("Circle color: " + s1.getColor());
-		System.out.println("Circle area: " + String.format("%.3f", s1.area()));
-		System.out.println("Rectangle color: " + s2.getColor());
-		System.out.println("Rectangle area: " + String.format("%.3f", s2.area()));
-		
+		ComboDevice cd = new ComboDevice("2081");
+		cd.processDoc("My dissertation");
+		cd.print("My dissertation");
+		System.out.println("Scan result: " + cd.scan());		
 	}
 }
