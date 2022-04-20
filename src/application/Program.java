@@ -1,26 +1,28 @@
 package application;
 
-import model.entities.ComboDevice;
-import model.entities.ConcretePrinter;
-import model.entities.ConcreteScanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Program {
-
 	public static void main(String[] args) {
-		
-		ConcretePrinter p = new ConcretePrinter("1080");
-		p.processDoc("My Letter");
-		p.print("My Letter");
-		System.out.println();
-		
-		ConcreteScanner s = new ConcreteScanner("2003");
-		s.processDoc("My Email");
-		System.out.println("Scan result: " + s.scan());
-		System.out.println();
-		
-		ComboDevice cd = new ComboDevice("2081");
-		cd.processDoc("My dissertation");
-		cd.print("My dissertation");
-		System.out.println("Scan result: " + cd.scan());		
+		List<String> list = new ArrayList<>();
+		String path = "D:\\out\\Names.txt";
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			String name = br.readLine();
+			while (name != null) {
+				list.add(name);
+				name = br.readLine();
+			}
+			Collections.sort(list);
+			for (String s : list) {
+				System.out.println(s);
+			}
+		} catch (IOException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 	}
 }
